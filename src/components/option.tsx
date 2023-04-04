@@ -1,24 +1,34 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 const Option = () => {
 
-  const handleClick = () => {
-    
+  const [level,setLevel] = useState("");
+  const [price,setPrice] = useState("");
+
+  const handleLevelButtonClick = (e:React.MouseEvent<HTMLButtonElement>) => {
+    setLevel((e.target as HTMLButtonElement).name)
+    console.log(level);
   }
 
+  const handlePriceButtonClick = (e:React.MouseEvent<HTMLButtonElement>) => {
+    setPrice((e.target as HTMLButtonElement).name)
+    console.log(level);
+  }
+  
   return(
     <OptionArticle>
       <Category>Level</Category>
       <ButtonDiv>
-        <Button>초급</Button>
-        <Button>중급</Button>
-        <Button>고급</Button>
+        <Button name="초급" onClick = {handleLevelButtonClick}>초급</Button>
+        <Button name="중급" onClick = {handleLevelButtonClick}>중급</Button>
+        <Button name="고급" onClick = {handleLevelButtonClick}>고급</Button>
       </ButtonDiv>
 
       <Category>Price</Category>
       <ButtonDiv>
-        <Button>무료</Button>
-        <Button>유료</Button>
+        <Button name="초급" onClick = {handlePriceButtonClick}>무료</Button>
+        <Button name="초급" onClick = {handlePriceButtonClick}>유료</Button>
       </ButtonDiv>
     </OptionArticle>
   )
