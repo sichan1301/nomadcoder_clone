@@ -5,9 +5,11 @@ const Tech = () => {
   return(
     <TechArticle>
       <Title>Tech</Title>
-      {
-        tech.map(tech => <TechButton>{tech}</TechButton>)
-      }
+      <TechDiv>
+        {
+          tech.map(tech => <TechButton>{tech}</TechButton>)
+        }
+      </TechDiv>
     </TechArticle>
   )
 }
@@ -23,6 +25,12 @@ const Title = styled.p`
   font-size:20px;
   color:#fff;
 `
+
+const TechDiv = styled.div`
+  display:flex;
+  flex-wrap:wrap;
+`
+
 const TechButton = styled.button`
   border:none;
   background-color: #fff;
@@ -33,4 +41,5 @@ const TechButton = styled.button`
   border-radius: 50%;
   width:80px;
   height:80px;
+  cursor:pointer;
 `

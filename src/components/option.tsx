@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 const Option = () => {
+
+  const handleClick = () => {
+    
+  }
+
   return(
     <OptionArticle>
       <Category>Level</Category>
@@ -8,6 +13,12 @@ const Option = () => {
         <Button>초급</Button>
         <Button>중급</Button>
         <Button>고급</Button>
+      </ButtonDiv>
+
+      <Category>Price</Category>
+      <ButtonDiv>
+        <Button>무료</Button>
+        <Button>유료</Button>
       </ButtonDiv>
     </OptionArticle>
   )
@@ -26,10 +37,11 @@ const OptionArticle = styled.article`
 const Category = styled.p`
   color:#fff;
   font-size:20px;
+  margin:0;
 `
 
 const ButtonDiv = styled.div`
-  
+  margin:0 0 20px 0; 
 `
 
 const Button = styled.button`
@@ -42,4 +54,5 @@ const Button = styled.button`
   margin:20px;
   border:none;
   width:70px;
+  cursor:pointer;
 `

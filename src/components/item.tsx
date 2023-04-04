@@ -12,12 +12,12 @@ const Item = ({item}:ItemPropsType) => {
     <ItemArticle>
       <ImgDiv>
         <Img src ={require(`../../public/img/${imgSrc}`)}  />
+        <ItemDiv>
+          <Title>{item.title}</Title>
+          <SubTitle>{item.subTitle}</SubTitle>
+        </ItemDiv>
       </ImgDiv>
 
-      <ItemDiv>
-        <Title>{item.title}</Title>
-        <SubTitle>{item.subTitle}</SubTitle>
-      </ItemDiv>
     </ItemArticle>
   )
 }
@@ -26,12 +26,15 @@ const Item = ({item}:ItemPropsType) => {
 export default Item 
 
 const ItemArticle = styled.article`
-  width:30%;
+  width:31%;
 `
 
 const ImgDiv = styled.div`
+  position:relative;
   width:100%;
-  height:250px;
+  height:230px;
+  margin-bottom:80px;
+  cursor:pointer;
 `
 
 const Img = styled.img`
@@ -41,19 +44,29 @@ const Img = styled.img`
 `
 
 const ItemDiv = styled.div`
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translate(-50%,50%);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width:90%;
+  width:80%;
+  margin:0 auto;
+  background-color:#1b222c;
+  border-radius:20px;
+  padding:20px;
 `
 
 const Title = styled.p`
   font-size : 20px;
   color:#fff;
+  margin:0 0 10px 0;
 `
 
 const SubTitle = styled.p`
   color:#fff;
   font-size: 16px;
+  margin:0;
 `
