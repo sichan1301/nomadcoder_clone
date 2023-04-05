@@ -8,15 +8,15 @@ function App() {
   
   return (
     <Main>
-      <Container>
+      <Inner>
         <Title>All Courses</Title>
         <SubTitle>초급부터 고급까지! <br />니꼬쌤과 함께 풀스택으로 성장하세요!</SubTitle>
-        <Section>
+        <SelectSection>
           <Option />
           <Tech />
-        </Section>
+        </SelectSection>
         <ItemList />
-      </Container>
+      </Inner>
     </Main>
   );
 }
@@ -31,13 +31,13 @@ const Main = styled.main`
   background-color: #222c3b;
 `
 
-const Container = styled.div`
+const Inner = styled.div`
   width:75%;
   height:100%;
   margin:0 auto;
 `
 
-const Section = styled.main`
+const SelectSection = styled.section`
   display: flex;
   margin-bottom:50px;
 `

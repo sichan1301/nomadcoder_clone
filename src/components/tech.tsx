@@ -7,22 +7,16 @@ const Tech = () => {
   const state = useSelector((state:RootState)=> state)
   const dispatch = useDispatch()
 
-  const handleClick = (tech?:string) => {
-    tech ? dispatch(TECH(tech)) : dispatch(TECH(undefined))
+  const handleClick = (tech?:string) =>{
+    tech !== undefined ? dispatch(TECH(tech)) : dispatch(TECH(undefined))
     dispatch(FILTER())
   }
-
-  const handleTechCategoryButton = () => {
-    dispatch(TECH(undefined))
-    dispatch(FILTER())
-
-  } 
 
   const displayTechButton = state.tech === undefined ? "Tech" : "x";
 
   return(
     <TechArticle>
-      <Title onClick={handleTechCategoryButton} isFiltered={state.tech !== undefined}>{displayTechButton}</Title>
+      <Title onClick={() => handleClick()} isFiltered={state.tech !== undefined}>{displayTechButton}</Title>
       <TechDiv>
         {tech.map(tech => <TechButton onClick={()=>handleClick(tech)}>{tech}</TechButton>)}
       </TechDiv>
@@ -54,6 +48,7 @@ const Title = styled.p<TitleProps>`
 
 const TechDiv = styled.div`
   display:flex;
+  justify-content:center;
   flex-wrap:wrap;
 `
 

@@ -37,6 +37,13 @@ const nomadCoder = createSlice({
         state.course = Course.filter(item => (item.level === state.level) && (item.price === state.price) && (item.tech?.find(item => item === state.tech)!== undefined))
       }
       else{
+        if(state.price === undefined){
+          state.course = Course.filter(item => item.level === state.level && item.tech?.find(item => item === state.tech)!== undefined)
+        }else if(state.level === undefined){
+          state.course = Course.filter(item => item.price === state.price && item.tech?.find(item => item === state.tech)!== undefined)
+        }else if(state.tech === undefined){
+          state.course = Course.filter(item => item.price === state.price && item.level === state.level)
+        }
         state.course = Course.filter(item => item.level === state.level || item.price === state.price || item.tech?.find(item => item === state.tech)!== undefined)
       }
 

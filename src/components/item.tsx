@@ -12,16 +12,16 @@ const Item = ({item}:ItemPropsType) => {
   return(
     <ItemArticle>
       <ImgDiv>
+        <a href = {item.link}>
+          <Img src ={require(`../../public/img/${imgSrc}`)}  />
 
-        <Img src ={require(`../../public/img/${imgSrc}`)}  />
+          <ItemDiv>
+            <Title>{item.title}</Title>
+            <SubTitle>{item.subTitle}</SubTitle>
+          </ItemDiv>
 
-        <ItemDiv>
-          <Title>{item.title}</Title>
-          <SubTitle>{item.subTitle}</SubTitle>
-        </ItemDiv>
-
-        <ItemLevel level={item.level}>{item.level}</ItemLevel>
-
+          <ItemLevel level={item.level}>{item.level}</ItemLevel>
+        </a>
       </ImgDiv>
     </ItemArticle>
   )

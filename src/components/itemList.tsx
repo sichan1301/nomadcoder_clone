@@ -8,8 +8,6 @@ import NotFound from './notfound';
 
 const ItemList = () => {
   const {course} = useSelector((state:RootState)=> state)
-  
-  console.log(course)
   return (
     <ItemListSection>
       {course.length !== 0 ? course.map((course:courseType) => <Item item={course}/>) : <NotFound />}
