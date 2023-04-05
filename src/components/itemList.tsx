@@ -4,13 +4,15 @@ import { Course } from '../dummyData/data';
 import Item from './item';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
+import NotFound from './notfound';
 
 const ItemList = () => {
   const {course} = useSelector((state:RootState)=> state)
   
+  console.log(course)
   return (
     <ItemListSection>
-      {course ? course.map((course:courseType) => <Item item={course}/>) : "there is no Course"}
+      {course.length !== 0 ? course.map((course:courseType) => <Item item={course}/>) : <NotFound />}
     </ItemListSection>
   )
 }

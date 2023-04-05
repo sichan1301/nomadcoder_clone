@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { PRICE,LEVEL,RootState } from '../store';
+import { PRICE,LEVEL,FILTER, RootState } from '../store';
 
 const Option = () => {
   const {price,level} = useSelector((state:RootState)=> state)
@@ -9,18 +9,22 @@ const Option = () => {
 
   const handleLevelButtonClick = (e:React.MouseEvent) => {
     dispatch(LEVEL((e.target as HTMLButtonElement).name)) 
+    dispatch(FILTER())
   }
 
   const handlePriceButtonClick = (e:React.MouseEvent) => {
     dispatch(PRICE((e.target as HTMLButtonElement).name))
+    dispatch(FILTER())
   }
   
   const handleLevelCategoryButtonClick = () => {
     dispatch(LEVEL(undefined))
+    dispatch(FILTER())
   }
 
   const handlePriceCategoryButtonClick = () => {
     dispatch(PRICE(undefined))
+    dispatch(FILTER())
   }
   
   const displayLevelButton = level === undefined ? "Level" : "x";

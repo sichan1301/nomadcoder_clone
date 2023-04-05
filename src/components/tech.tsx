@@ -1,27 +1,30 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { tech } from '../dummyData/data';
-import { RootState, TECH } from '../store';
+import { RootState, TECH, FILTER } from '../store';
 
 const Tech = () => {
   const state = useSelector((state:RootState)=> state)
-
   const dispatch = useDispatch()
-  const handleTechClick = (tech:string) => {
-    dispatch(TECH(tech))
+
+  const handleClick = (tech?:string) => {
+    tech ? dispatch(TECH(tech)) : dispatch(TECH(undefined))
+    dispatch(FILTER())
   }
 
   const handleTechCategoryButton = () => {
     dispatch(TECH(undefined))
+    dispatch(FILTER())
+
   } 
 
-  const displayLevelButton = state.tech === undefined ? "Tech" : "x";
+  const displayTechButton = state.tech === undefined ? "Tech" : "x";
 
   return(
     <TechArticle>
-      <TechCategory onClick={handleTechCategoryButton} isFiltered={state.tech !== undefined}>{displayLevelButton}</TechCategory>
+      <Title onClick={handleTechCategoryButton} isFiltered={state.tech !== undefined}>{displayTechButton}</Title>
       <TechDiv>
-        {tech.map(tech => <TechButton onClick={()=>handleTechClick(tech)}>{tech}</TechButton>)}
+        {tech.map(tech => <TechButton onClick={()=>handleClick(tech)}>{tech}</TechButton>)}
       </TechDiv>
     </TechArticle>
   )
@@ -32,11 +35,11 @@ export default Tech
 const TechArticle = styled.article`
   width:60%;
 `
-type TechCategoryProps = {
+type TitleProps = {
   isFiltered : boolean
 }
 
-const TechCategory = styled.p<TechCategoryProps>`
+const Title = styled.p<TitleProps>`
   border-radius:${props => props.isFiltered ? `50%`:`0`};
   background-color:${props => props.isFiltered ? `#fff`:`transparent`};
   color:${props => props.isFiltered ? `black`:`#fff`};

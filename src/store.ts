@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { configureStore } from "@reduxjs/toolkit";
+import { createSlice,configureStore } from "@reduxjs/toolkit";
 import { Course } from "./dummyData/data";
 import { courseType } from "./dummyData/dataType";
 
@@ -23,29 +22,25 @@ const nomadCoder = createSlice({
 	reducers:{
 		PRICE:(state:IState,action) => {
       state.price = action.payload
-      if(state.level === undefined && state.price === undefined && state.tech === undefined){
-        state.course = Course
-      }else if(state.level !== undefined && state.price !== undefined ){
-        state.course = Course.filter(item => item.level === state.level && item.price === state.price)
-      }
-      else{
-        state.course = Course.filter(item => item.level === state.level || item.price === state.price)
-      }
 		},
 		LEVEL:(state:IState,action) => {
       state.level = action.payload
-      if(state.level === undefined && state.price === undefined && state.tech === undefined){
-        state.course = Course
-      }else if(state.level !== undefined && state.price !== undefined ){
-        state.course = Course.filter(item => item.level === state.level && item.price === state.price )
-      }
-      else{
-        state.course = Course.filter(item => item.level === state.level || item.price === state.price )
-      }
 		},
 		TECH:(state:IState,action) => {
       state.tech = action.payload
-		}
+		},
+    FILTER:(state) => {
+      if(state.level === undefined && state.price === undefined && state.tech === undefined){
+        state.course = Course
+      }
+      else if(state.level !== undefined && state.price !== undefined && state.tech !== undefined ){
+        state.course = Course.filter(item => (item.level === state.level) && (item.price === state.price) && (item.tech?.find(item => item === state.tech)!== undefined))
+      }
+      else{
+        state.course = Course.filter(item => item.level === state.level || item.price === state.price || item.tech?.find(item => item === state.tech)!== undefined)
+      }
+
+    }
 }})
 
 export const store = configureStore({
@@ -54,6 +49,6 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 
-export const {PRICE,LEVEL,TECH} = nomadCoder.actions
+export const {PRICE,LEVEL,TECH, FILTER} = nomadCoder.actions
 
 export default nomadCoder
