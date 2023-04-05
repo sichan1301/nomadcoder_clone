@@ -1,17 +1,25 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { tech } from '../dummyData/data';
-import { TECH } from '../store';
+import { RootState, TECH } from '../store';
 
 const Tech = () => {
+  const state = useSelector((state:RootState)=> state)
+
   const dispatch = useDispatch()
   const handleTechClick = (tech:string) => {
     dispatch(TECH(tech))
   }
 
+  const handleTechCategoryButton = () => {
+    dispatch(TECH(undefined))
+  } 
+
+  const displayLevelButton = state.tech === undefined ? "Tech" : "x";
+
   return(
     <TechArticle>
-      <Title>Tech</Title>
+      <TechCategory onClick={handleTechCategoryButton} isFiltered={state.tech !== undefined}>{displayLevelButton}</TechCategory>
       <TechDiv>
         {tech.map(tech => <TechButton onClick={()=>handleTechClick(tech)}>{tech}</TechButton>)}
       </TechDiv>
@@ -24,11 +32,21 @@ export default Tech
 const TechArticle = styled.article`
   width:60%;
 `
+type TechCategoryProps = {
+  isFiltered : boolean
+}
 
-const Title = styled.p`
-  text-align: center;
+const TechCategory = styled.p<TechCategoryProps>`
+  border-radius:${props => props.isFiltered ? `50%`:`0`};
+  background-color:${props => props.isFiltered ? `#fff`:`transparent`};
+  color:${props => props.isFiltered ? `black`:`#fff`};
+  border:none;
   font-size:20px;
-  color:#fff;
+  width:30px;
+  height:30px;
+  cursor:pointer;
+  margin:20px auto;
+  text-align:center;
 `
 
 const TechDiv = styled.div`
