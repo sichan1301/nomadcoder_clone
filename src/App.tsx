@@ -5,6 +5,7 @@ import Option from './components/option';
 import Tech from './components/tech';
 
 function App() {
+  
   return (
     <Main>
       <Container>
@@ -34,7 +35,6 @@ const Container = styled.div`
   width:75%;
   height:100%;
   margin:0 auto;
-
 `
 
 const Section = styled.main`

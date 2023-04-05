@@ -1,14 +1,19 @@
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { tech } from '../dummyData/data';
+import { TECH } from '../store';
 
 const Tech = () => {
+  const dispatch = useDispatch()
+  const handleTechClick = (tech:string) => {
+    dispatch(TECH(tech))
+  }
+
   return(
     <TechArticle>
       <Title>Tech</Title>
       <TechDiv>
-        {
-          tech.map(tech => <TechButton>{tech}</TechButton>)
-        }
+        {tech.map(tech => <TechButton onClick={()=>handleTechClick(tech)}>{tech}</TechButton>)}
       </TechDiv>
     </TechArticle>
   )

@@ -1,4 +1,4 @@
-import { courseType } from "../dummyData/dataType"
+import { courseType, levelType } from "../dummyData/dataType"
 import styled from 'styled-components';
 
 type ItemPropsType = {
@@ -7,17 +7,22 @@ type ItemPropsType = {
 
 const Item = ({item}:ItemPropsType) => {
 
-  const imgSrc = item.price=== "유료" ? "cost.jpg" : "free.jpg"
+  const imgSrc = item.price === "유료" ? "cost.jpg" : "free.jpg"
+  
   return(
     <ItemArticle>
       <ImgDiv>
+
         <Img src ={require(`../../public/img/${imgSrc}`)}  />
+
         <ItemDiv>
           <Title>{item.title}</Title>
           <SubTitle>{item.subTitle}</SubTitle>
         </ItemDiv>
-      </ImgDiv>
 
+        <ItemLevel level={item.level}>{item.level}</ItemLevel>
+
+      </ImgDiv>
     </ItemArticle>
   )
 }
@@ -69,4 +74,39 @@ const SubTitle = styled.p`
   color:#fff;
   font-size: 16px;
   margin:0;
+`
+
+type ItemLevelProps = {
+  level:levelType
+}
+
+const ItemLevel = styled.p<ItemLevelProps>`
+  position:absolute;
+  top:5px;
+  left:15px;
+  font-size: 20px;
+  padding:5px 10px;
+  font-weight: 900;
+  border-radius: 20px;
+  background-color:${props => {
+    switch(props.level) {
+      case "초급":
+        return `rgb(251, 251, 231)`;
+      case "중급":
+        return `rgb(230, 250, 236)`;
+      case "고급":
+        return `rgb(249, 224, 253)`;
+    }
+  }};
+
+  color:${props => {
+    switch(props.level) {
+      case "초급":
+        return `rgb(172, 169, 0)`;
+      case "중급":
+        return `rgb(3, 210, 51)`;
+      case "고급":
+        return `rgb(201, 6, 231)`;
+    }
+  }}
 `

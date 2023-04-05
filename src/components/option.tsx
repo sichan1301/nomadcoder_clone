@@ -1,34 +1,44 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { PRICE,LEVEL,RootState } from '../store';
 
 const Option = () => {
+  const {price,level} = useSelector((state:RootState)=> state)
+  const dispatch = useDispatch()
 
-  const [level,setLevel] = useState("");
-  const [price,setPrice] = useState("");
-
-  const handleLevelButtonClick = (e:React.MouseEvent<HTMLButtonElement>) => {
-    setLevel((e.target as HTMLButtonElement).name)
-    console.log(level);
+  const handleLevelButtonClick = (e:React.MouseEvent) => {
+    dispatch(LEVEL((e.target as HTMLButtonElement).name)) 
   }
 
-  const handlePriceButtonClick = (e:React.MouseEvent<HTMLButtonElement>) => {
-    setPrice((e.target as HTMLButtonElement).name)
-    console.log(level);
+  const handlePriceButtonClick = (e:React.MouseEvent) => {
+    dispatch(PRICE((e.target as HTMLButtonElement).name))
   }
   
+  const handleLevelCategoryButtonClick = () => {
+    dispatch(LEVEL(undefined))
+  }
+
+  const handlePriceCategoryButtonClick = () => {
+    dispatch(PRICE(undefined))
+  }
+  
+  const displayLevelButton = level === undefined ? "Level" : "x";
+  const displayPriceButton = price === undefined ? "Price" : "x";
+
   return(
     <OptionArticle>
-      <Category>Level</Category>
+      <CategoryButton isFiltered = {level !== undefined} onClick ={handleLevelCategoryButtonClick}>{displayLevelButton}</CategoryButton>
       <ButtonDiv>
         <Button name="초급" onClick = {handleLevelButtonClick}>초급</Button>
         <Button name="중급" onClick = {handleLevelButtonClick}>중급</Button>
         <Button name="고급" onClick = {handleLevelButtonClick}>고급</Button>
       </ButtonDiv>
 
-      <Category>Price</Category>
+      <CategoryButton isFiltered = {price !== undefined} onClick ={handlePriceCategoryButtonClick} >{displayPriceButton}</CategoryButton>
       <ButtonDiv>
-        <Button name="초급" onClick = {handlePriceButtonClick}>무료</Button>
-        <Button name="초급" onClick = {handlePriceButtonClick}>유료</Button>
+        <Button name="무료" onClick = {handlePriceButtonClick}>무료</Button>
+        <Button name="유료" onClick = {handlePriceButtonClick}>유료</Button>
       </ButtonDiv>
     </OptionArticle>
   )
@@ -44,8 +54,15 @@ const OptionArticle = styled.article`
   width:50%;
 `
 
-const Category = styled.p`
-  color:#fff;
+type CategoryButtonProps = {
+  isFiltered : boolean
+}
+const CategoryButton = styled.button<CategoryButtonProps>`
+  border-radius:${props => props.isFiltered ? `50%`:`0`};
+  background-color:${props => props.isFiltered ? `#fff`:`transparent`};
+  color:${props => props.isFiltered ? `black`:`#fff`};
+  border:none;
+  cursor:pointer;
   font-size:20px;
   margin:0;
 `
@@ -54,7 +71,11 @@ const ButtonDiv = styled.div`
   margin:0 0 20px 0; 
 `
 
-const Button = styled.button`
+type ButtonProps = {
+  name:string
+}
+
+const Button = styled.button<ButtonProps>`
   color:black;
   padding:5px 10px;
   font-size:16px;

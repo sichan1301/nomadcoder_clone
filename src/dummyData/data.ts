@@ -4,7 +4,6 @@ export const tech = [
   "Javascript","Python","HTML5","CSS3","NodeJS","React","GraphQL","Typescript","Go","Redux","Django","NestJS","Firebase","React Native","NextJS","TailwindCSS","Dart","Flutter"
 ]
 
-
 export const Course:courseType[] = [
   {
     title:"[풀스택] 유튜브 클론코딩",
@@ -19,8 +18,8 @@ export const Course:courseType[] = [
     title:"코코아톡 클론코딩",
     subTitle:"HTML, CSS, Github",
     link:"www.~.com",
-    price:"초급",
-    level:"유료",
+    price:"유료",
+    level:"초급",
     tech:["HTML","CSS3", "Github"],
     imgSrc:"smile.jpg"
   },
