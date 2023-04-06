@@ -3,9 +3,9 @@ import { Course } from "./dummyData/data";
 import { courseType } from "./dummyData/dataType";
 
 interface IState {
-	price?:string,
-	level?:string,
-	tech?:string,
+	price:string,
+	level:string,
+	tech:string,
   course:courseType[]
 }
 
@@ -14,9 +14,9 @@ const nomadCoder = createSlice({
 	
 	initialState:{
     course:Course,
-    price:undefined,
-    level:undefined,
-    tech:undefined
+    price:"",
+    level:"",
+    tech:""
 	},
 
 	reducers:{
@@ -30,21 +30,29 @@ const nomadCoder = createSlice({
       state.tech = action.payload
 		},
     FILTER:(state) => {
-      if(state.level === undefined && state.price === undefined && state.tech === undefined){
+      if(state.level === "" && state.price === "" && state.tech === ""){
         state.course = Course
       }
-      else if(state.level !== undefined && state.price !== undefined && state.tech !== undefined ){
-        state.course = Course.filter(item => (item.level === state.level) && (item.price === state.price) && (item.tech?.find(item => item === state.tech)!== undefined))
+      else if(state.level !== "" && state.price === "" && state.tech === ""){
+        state.course = Course.filter(item => item.level === state.level)
+      }
+      else if(state.level !== "" && state.price !== "" && state.tech === ""){
+        state.course = Course.filter(item => item.level === state.level && item.price === state.price)
+      }
+      else if(state.level === "" && state.price !== "" && state.tech !== ""){
+        state.course = Course.filter(item => item.price === state.price && item.tech?.includes(state.tech))
+      }
+      else if(state.level === "" && state.price === "" && state.tech !== ""){
+        state.course = Course.filter(item => item.tech?.includes(state.tech))
+      }
+      else if(state.level === "" && state.price !== "" && state.tech === ""){
+        state.course = Course.filter(item => item.price === state.price)
+      }
+      else if(state.level !== "" && state.price === "" && state.tech !== ""){
+        state.course = Course.filter(item => item.level === state.level && item.tech?.includes(state.tech))
       }
       else{
-        if(state.price === undefined){
-          state.course = Course.filter(item => item.level === state.level && item.tech?.find(item => item === state.tech)!== undefined)
-        }else if(state.level === undefined){
-          state.course = Course.filter(item => item.price === state.price && item.tech?.find(item => item === state.tech)!== undefined)
-        }else if(state.tech === undefined){
-          state.course = Course.filter(item => item.price === state.price && item.level === state.level)
-        }
-        state.course = Course.filter(item => item.level === state.level || item.price === state.price || item.tech?.find(item => item === state.tech)!== undefined)
+        state.course = Course.filter(item => item.level === state.level && item.price === state.price && item.tech?.includes(state.tech))
       }
 
     }

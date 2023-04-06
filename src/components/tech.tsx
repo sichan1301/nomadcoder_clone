@@ -8,15 +8,15 @@ const Tech = () => {
   const dispatch = useDispatch()
 
   const handleClick = (tech?:string) =>{
-    tech !== undefined ? dispatch(TECH(tech)) : dispatch(TECH(undefined))
+    tech !== undefined ? dispatch(TECH(tech)) : dispatch(TECH(""))
     dispatch(FILTER())
   }
 
-  const displayTechButton = state.tech === undefined ? "Tech" : "x";
+  const displayTechButton = state.tech === "" ? "Tech" : "x";
 
   return(
     <TechArticle>
-      <Title onClick={() => handleClick()} isFiltered={state.tech !== undefined}>{displayTechButton}</Title>
+      <Title onClick={() => handleClick()} isFiltered={state.tech !== ""}>{displayTechButton}</Title>
       <TechDiv>
         {tech.map(tech => <TechButton onClick={()=>handleClick(tech)}>{tech}</TechButton>)}
       </TechDiv>
@@ -48,7 +48,7 @@ const Title = styled.p<TitleProps>`
 
 const TechDiv = styled.div`
   display:flex;
-  justify-content:center;
+  justify-content:start;
   flex-wrap:wrap;
 `
 

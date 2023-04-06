@@ -8,9 +8,9 @@ const NotFound = () => {
   const dispatch = useDispatch()
 
   const handleClick = () =>{
-    dispatch(PRICE(undefined))
-    dispatch(LEVEL(undefined))
-    dispatch(TECH(undefined))
+    dispatch(PRICE(""))
+    dispatch(LEVEL(""))
+    dispatch(TECH(""))
     dispatch(FILTER())
   }
 

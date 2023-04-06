@@ -18,28 +18,28 @@ const Option = () => {
   }
   
   const handleLevelCategoryButtonClick = () => {
-    dispatch(LEVEL(undefined))
+    dispatch(LEVEL(""))
     dispatch(FILTER())
   }
 
   const handlePriceCategoryButtonClick = () => {
-    dispatch(PRICE(undefined))
+    dispatch(PRICE(""))
     dispatch(FILTER())
   }
   
-  const displayLevelButton = level === undefined ? "Level" : "x";
-  const displayPriceButton = price === undefined ? "Price" : "x";
+  const displayLevelButton = level === "" ? "Level" : "x";
+  const displayPriceButton = price === "" ? "Price" : "x";
 
   return(
     <OptionArticle>
-      <CategoryButton isFiltered = {level !== undefined} onClick ={handleLevelCategoryButtonClick}>{displayLevelButton}</CategoryButton>
+      <CategoryButton isFiltered = {level !== ""} onClick ={handleLevelCategoryButtonClick}>{displayLevelButton}</CategoryButton>
       <ButtonDiv>
         <Button name="초급" onClick = {handleLevelButtonClick}>초급</Button>
         <Button name="중급" onClick = {handleLevelButtonClick}>중급</Button>
         <Button name="고급" onClick = {handleLevelButtonClick}>고급</Button>
       </ButtonDiv>
 
-      <CategoryButton isFiltered = {price !== undefined} onClick ={handlePriceCategoryButtonClick} >{displayPriceButton}</CategoryButton>
+      <CategoryButton isFiltered = {price !== ""} onClick ={handlePriceCategoryButtonClick} >{displayPriceButton}</CategoryButton>
       <ButtonDiv>
         <Button name="무료" onClick = {handlePriceButtonClick}>무료</Button>
         <Button name="유료" onClick = {handlePriceButtonClick}>유료</Button>

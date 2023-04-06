@@ -10,7 +10,7 @@ const ItemList = () => {
   const {course} = useSelector((state:RootState)=> state)
   return (
     <ItemListSection>
-      {course.length !== 0 ? course.map((course:courseType) => <Item item={course}/>) : <NotFound />}
+      {course.length !== 0 ?course.map((course:courseType) => <Item item={course}/>) : <NotFound /> }
     </ItemListSection>
   )
 }

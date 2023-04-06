@@ -33,7 +33,6 @@ const Main = styled.main`
 
 const Inner = styled.div`
   width:75%;
-  height:100%;
   margin:0 auto;
 `
 
