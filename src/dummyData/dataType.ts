@@ -10,5 +10,5 @@ export type courseType = {
 
 
 export type levelType = "초급" | "중급" | "고급";
-export type priceType = "유료" | "무료"
+export type priceType = "유료" | "무료";
 

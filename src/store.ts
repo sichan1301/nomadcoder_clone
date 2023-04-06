@@ -3,10 +3,10 @@ import { Course } from "./dummyData/data";
 import { courseType } from "./dummyData/dataType";
 
 interface IState {
+  course:courseType[],
 	price:string,
 	level:string,
 	tech:string,
-  course:courseType[]
 }
 
 const nomadCoder = createSlice({
@@ -21,7 +21,7 @@ const nomadCoder = createSlice({
 
 	reducers:{
 		PRICE:(state:IState,action) => {
-      state.price = action.payload
+      state.price = action.payload 
 		},
 		LEVEL:(state:IState,action) => {
       state.level = action.payload
@@ -54,14 +54,10 @@ const nomadCoder = createSlice({
       // else{
       //   state.course = Course.filter(item => state.level === "" && item.price === state.price && item.tech?.includes(state.tech))
       // }
-
-      // state.course = Course.filter(item => (state.level === "" ? true : item.level === state.level) && item.price === state.price && item.tech?.includes(state.tech))
-
-      state.course = Course.filter(item =>
-                            (state.level === "" ? true : item.level === state.level) && item.price === state.price && item.tech?.includes(state.tech) &&
-                            (state.price === "" ? true : item.price === state.price) && item.level === state.level && item.tech?.includes(state.tech) &&
-                            (state.tech === "" ? true : item.tech?.includes(state.tech)) && item.price === state.price && item.level === state.level   )
-      
+                  
+      state.course = Course.filter(item =>          
+        (state.price === "" ? true : item.price === state.price) && (state.level === "" ? true : item.level === state.level) && (state.tech === "" ? true: item.tech?.includes(state.tech)) 
+      )
     }
 }})
 
