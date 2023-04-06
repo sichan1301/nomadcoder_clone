@@ -1,47 +1,31 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { PRICE,LEVEL,FILTER, RootState } from '../store';
+import { OPTION,RootState } from '../store';
 
 const Option = () => {
   const {price,level} = useSelector((state:RootState)=> state)
   const dispatch = useDispatch()
 
-  const handleLevelButtonClick = (e:React.MouseEvent) => {
-    dispatch(LEVEL((e.target as HTMLButtonElement).name)) 
-    dispatch(FILTER())
+  const handelClick  = (e:React.MouseEvent,a:object) => {
+    dispatch(OPTION(a)) 
   }
 
-  const handlePriceButtonClick = (e:React.MouseEvent) => {
-    dispatch(PRICE((e.target as HTMLButtonElement).name))
-    dispatch(FILTER())
-  }
-  
-  const handleLevelCategoryButtonClick = () => {
-    dispatch(LEVEL(""))
-    dispatch(FILTER())
-  }
-
-  const handlePriceCategoryButtonClick = () => {
-    dispatch(PRICE(""))
-    dispatch(FILTER())
-  }
-  
   const displayLevelButton = level === "" ? "Level" : "x";
   const displayPriceButton = price === "" ? "Price" : "x";
 
   return(
     <OptionArticle>
-      <CategoryButton isFiltered = {level !== ""} onClick ={handleLevelCategoryButtonClick}>{displayLevelButton}</CategoryButton>
+      <CategoryButton isFiltered = {level !== ""} onClick ={(e)=>{handelClick(e, {level:''})}}>{displayLevelButton}</CategoryButton>
       <ButtonDiv>
-        <Button name="초급" onClick = {handleLevelButtonClick}>초급</Button>
-        <Button name="중급" onClick = {handleLevelButtonClick}>중급</Button>
-        <Button name="고급" onClick = {handleLevelButtonClick}>고급</Button>
+        <Button onClick = {(e)=>{handelClick(e, {level:'초급'})}}>초급</Button>
+        <Button onClick = {(e)=>{handelClick(e, {level:'중급'})}}>중급</Button>
+        <Button onClick = {(e)=>{handelClick(e, {level:'고급'})}}>고급</Button>
       </ButtonDiv>
 
-      <CategoryButton isFiltered = {price !== ""} onClick ={handlePriceCategoryButtonClick} >{displayPriceButton}</CategoryButton>
+      <CategoryButton isFiltered = {price !== ""} onClick ={(e)=>{handelClick(e, {price:''})}} >{displayPriceButton}</CategoryButton>
       <ButtonDiv>
-        <Button name="무료" onClick = {handlePriceButtonClick}>무료</Button>
-        <Button name="유료" onClick = {handlePriceButtonClick}>유료</Button>
+        <Button onClick = {(e)=>{handelClick(e, {price:'무료'})}}>무료</Button>
+        <Button onClick = {(e)=>{handelClick(e, {level:'유료'})}}>유료</Button>
       </ButtonDiv>
     </OptionArticle>
   )
@@ -74,11 +58,7 @@ const ButtonDiv = styled.div`
   margin:0 0 20px 0; 
 `
 
-type ButtonProps = {
-  name:string
-}
-
-const Button = styled.button<ButtonProps>`
+const Button = styled.button`
   color:black;
   padding:5px 10px;
   font-size:16px;

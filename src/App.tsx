@@ -25,8 +25,6 @@ export default App;
 
 const Main = styled.main`
   display: flex;
-  flex-direction: column;
-  align-items: center;
   height:100%;
   background-color: #222c3b;
 `
