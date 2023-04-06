@@ -16,7 +16,7 @@ const nomadCoder = createSlice({
     course:Course,
     price:"",
     level:"",
-    tech:""
+    tech:"",
 	},
 
 	reducers:{
@@ -30,31 +30,38 @@ const nomadCoder = createSlice({
       state.tech = action.payload
 		},
     FILTER:(state) => {
-      if(state.level === "" && state.price === "" && state.tech === ""){
-        state.course = Course
-      }
-      else if(state.level !== "" && state.price === "" && state.tech === ""){
-        state.course = Course.filter(item => item.level === state.level)
-      }
-      else if(state.level !== "" && state.price !== "" && state.tech === ""){
-        state.course = Course.filter(item => item.level === state.level && item.price === state.price)
-      }
-      else if(state.level === "" && state.price !== "" && state.tech !== ""){
-        state.course = Course.filter(item => item.price === state.price && item.tech?.includes(state.tech))
-      }
-      else if(state.level === "" && state.price === "" && state.tech !== ""){
-        state.course = Course.filter(item => item.tech?.includes(state.tech))
-      }
-      else if(state.level === "" && state.price !== "" && state.tech === ""){
-        state.course = Course.filter(item => item.price === state.price)
-      }
-      else if(state.level !== "" && state.price === "" && state.tech !== ""){
-        state.course = Course.filter(item => item.level === state.level && item.tech?.includes(state.tech))
-      }
-      else{
-        state.course = Course.filter(item => item.level === state.level && item.price === state.price && item.tech?.includes(state.tech))
-      }
+      // if(state.level === "" && state.price === "" && state.tech === ""){
+      //   state.course = Course
+      // }
+      // else if(state.level !== "" && state.price === "" && state.tech === ""){
+      //   state.course = Course.filter(item => item.level === state.level)
+      // }
+      // else if(state.level !== "" && state.price !== "" && state.tech === ""){
+      //   state.course = Course.filter(item => item.level === state.level && item.price === state.price)
+      // }
+      // else if(state.level === "" && state.price !== "" && state.tech !== ""){
+      //   state.course = Course.filter(item => item.price === state.price && item.tech?.includes(state.tech))
+      // }
+      // else if(state.level === "" && state.price === "" && state.tech !== ""){
+      //   state.course = Course.filter(item => item.tech?.includes(state.tech))
+      // }
+      // else if(state.level === "" && state.price !== "" && state.tech === ""){
+      //   state.course = Course.filter(item => item.price === state.price)
+      // }
+      // else if(state.level !== "" && state.price === "" && state.tech !== ""){
+      //   state.course = Course.filter(item => item.level === state.level && item.tech?.includes(state.tech))
+      // }
+      // else{
+      //   state.course = Course.filter(item => state.level === "" && item.price === state.price && item.tech?.includes(state.tech))
+      // }
 
+      // state.course = Course.filter(item => (state.level === "" ? true : item.level === state.level) && item.price === state.price && item.tech?.includes(state.tech))
+
+      state.course = Course.filter(item =>
+                            (state.level === "" ? true : item.level === state.level) && item.price === state.price && item.tech?.includes(state.tech) &&
+                            (state.price === "" ? true : item.price === state.price) && item.level === state.level && item.tech?.includes(state.tech) &&
+                            (state.tech === "" ? true : item.tech?.includes(state.tech)) && item.price === state.price && item.level === state.level   )
+      
     }
 }})
 

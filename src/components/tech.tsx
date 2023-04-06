@@ -7,16 +7,16 @@ const Tech = () => {
   const state = useSelector((state:RootState)=> state)
   const dispatch = useDispatch()
 
-  const handleClick = (tech?:string) =>{
-    tech !== undefined ? dispatch(TECH(tech)) : dispatch(TECH(""))
-    dispatch(FILTER())
+  const handleClick = (tech:string) =>{
+    dispatch(TECH(tech));
+    dispatch(FILTER());
   }
 
   const displayTechButton = state.tech === "" ? "Tech" : "x";
 
   return(
     <TechArticle>
-      <Title onClick={() => handleClick()} isFiltered={state.tech !== ""}>{displayTechButton}</Title>
+      <Title onClick={() => handleClick("")} isFiltered={state.tech !== ""}>{displayTechButton}</Title>
       <TechDiv>
         {tech.map(tech => <TechButton onClick={()=>handleClick(tech)}>{tech}</TechButton>)}
       </TechDiv>
