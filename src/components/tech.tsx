@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { tech } from '../dummyData/data';
-import { RootState, OPTION } from '../store';
+import { RootState, FILTER } from '../store';
 
 const Tech = () => {
   const state = useSelector((state:RootState)=> state)
   const dispatch = useDispatch()
 
   const handleClick = (tech:string) =>{
-    dispatch(OPTION({tech:tech}));
-
+    dispatch(FILTER({tech:tech}));
   }
 
   const displayTechButton = state.tech === "" ? "Tech" : "x";

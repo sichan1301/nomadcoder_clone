@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { OPTION,RootState } from '../store';
+import { FILTER,RootState } from '../store';
 
 const Option = () => {
   const {price,level} = useSelector((state:RootState)=> state)
   const dispatch = useDispatch()
 
   const handelClick  = (e:React.MouseEvent,a:object) => {
-    dispatch(OPTION(a)) 
+    dispatch(FILTER(a)) 
   }
 
   const displayLevelButton = level === "" ? "Level" : "x";
@@ -25,7 +25,7 @@ const Option = () => {
       <CategoryButton isFiltered = {price !== ""} onClick ={(e)=>{handelClick(e, {price:''})}} >{displayPriceButton}</CategoryButton>
       <ButtonDiv>
         <Button onClick = {(e)=>{handelClick(e, {price:'무료'})}}>무료</Button>
-        <Button onClick = {(e)=>{handelClick(e, {level:'유료'})}}>유료</Button>
+        <Button onClick = {(e)=>{handelClick(e, {price:'유료'})}}>유료</Button>
       </ButtonDiv>
     </OptionArticle>
   )

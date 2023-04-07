@@ -1,13 +1,5 @@
-import { createSlice,configureStore } from "@reduxjs/toolkit";
+import { createSlice,configureStore, current } from "@reduxjs/toolkit";
 import { Course } from "./dummyData/data";
-import { courseType } from "./dummyData/dataType";
-
-interface IState {
-  course:courseType[],
-	price:string,
-	level:string,
-	tech:string,
-}
 
 const nomadCoder = createSlice({
 	name:"nomadCoderReducer",
@@ -18,14 +10,14 @@ const nomadCoder = createSlice({
     level:"",
     tech:"",
 	},
-
+  
 	reducers:{
-		OPTION:(state:IState,action) => {
-      action.payload.price !== undefined && (state.price = action.payload.price)
-      action.payload.level !== undefined && (state.level = action.payload.level) 
-      action.payload.tech !== undefined && (state.tech = action.payload.tech)      
-      state.course = Course.filter(item => (state.price === "" ? true : item.price === state.price) && (state.level === "" ? true : item.level === state.level) && (state.tech === "" ? true: item.tech?.includes(state.tech)) )
-		}
+		FILTER:(state,action) => {
+      // state = {...state,[Object.keys(action.payload)[0]]:Object.values(action.payload)[0]}
+      state = {...state, ...action.payload}
+      state.course = Course.filter(item => (state.price === "" ? true : item.price === state.price) && (state.level === "" ? true : item.level === state.level) && (state.tech === "" ? true: item.tech?.includes(state.tech)))
+      return state
+    }
   }
 })
 
@@ -35,6 +27,6 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 
-export const {OPTION} = nomadCoder.actions
+export const {FILTER} = nomadCoder.actions
 
 export default nomadCoder

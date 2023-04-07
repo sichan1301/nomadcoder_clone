@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
 import styled from "styled-components"
-import { OPTION } from "../store"
+import { FILTER } from "../store"
 
 
 const NotFound = () => {
@@ -8,7 +8,7 @@ const NotFound = () => {
   const dispatch = useDispatch()
 
   const handleClick = () =>{
-    dispatch(OPTION({price:"",level:"",tech:""}))
+    dispatch(FILTER({price:"",level:"",tech:""}))
   }
 
   return (
